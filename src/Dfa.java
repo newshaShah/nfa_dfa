@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -10,14 +14,34 @@ class Dfa {
     private String[] finalStates;
     private HashMap<String[], String> transmissions;
 
-    Dfa(String start, String[] alphabets, String[] states, String[] finalStates, HashMap<String[], String> transmissions) {
-        this.alphabets = alphabets;
+    Dfa(String fileName) throws IOException {
+        ArrayList<String> lines = new ArrayList<>();
 
-        this.currentState = start;
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
 
-        this.finalStates = finalStates;
-        this.transmissions = transmissions;
-        this.states = states;
+            }
+        }
+
+        alphabets = lines.get(0).split(" ");
+
+        states = lines.get(1).split(" ");
+        currentState = lines.get(2);
+        finalStates = lines.get(3).split(" ");
+        transmissions = new HashMap<>();
+        for (int i = 4; i < lines.size(); i++) {
+            String[] key = new String[2];
+            String[] t = lines.get(i).split(" ");
+            key[0] = t[0];
+            key[1] = t[1];
+
+
+            transmissions.put(key, t[2]);
+
+
+        }
 
     }
 
