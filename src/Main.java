@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,5 +17,15 @@ public class Main {
         } else {
             System.out.println("This input string is 'not' accepted by DFA_Input_1 ");
         }
+
+        Nfa nfa = new Nfa("textFiles/NFA_Input_2.txt");
+
+       // System.out.println(nfa.deltaStar("q0","0"));
+        nfa.nfa2dfa();
+
+
+
+
+
     }
 }
