@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66e9b3f1-6707-4605-830d-c11994f458d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/theoryOfLanguages_p1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/theoryOfLanguages_p1/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dfa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dfa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/theoryOfLanguages_p1/Dfa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/theoryOfLanguages_p1/Dfa.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Nfa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nfa.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -49,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Nfa.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5729">
-              <caret line="337" column="72" selection-start-line="337" selection-start-column="72" selection-end-line="337" selection-end-column="72" />
+            <state relative-caret-position="170">
+              <caret line="252" column="8" selection-start-line="252" selection-start-column="8" selection-end-line="252" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,7 +58,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/textFiles/NFA_Input_2.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -94,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/textFiles/DFA_Output _2.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+            <state relative-caret-position="170">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -131,11 +128,11 @@
         <option value="$PROJECT_DIR$/src/dfa.java" />
         <option value="$PROJECT_DIR$/src/NFA1.java" />
         <option value="$PROJECT_DIR$/textFiles/DFA_Output _2.txt" />
-        <option value="$PROJECT_DIR$/src/Nfa.java" />
         <option value="$PROJECT_DIR$/src/Dfa.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/textFiles/DFA_Input_1.txt" />
         <option value="$PROJECT_DIR$/textFiles/NFA_Input_2.txt" />
+        <option value="$PROJECT_DIR$/src/Nfa.java" />
       </list>
     </option>
   </component>
@@ -259,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588795036656</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Comments added">
+      <created>1588798625252</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1588798625252</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -298,7 +302,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="Change Dfa constructor" />
     <MESSAGE value="Nfa class and function for converting nfa to dfa added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nfa class and function for converting nfa to dfa added" />
+    <MESSAGE value="Comments added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comments added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -328,23 +333,6 @@
     <entry file="file://$PROJECT_DIR$/src/NFA1.java" />
     <entry file="file://$PROJECT_DIR$/DFA_Output _2.txt">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textFiles/DFA_Output _2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Nfa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5729">
-          <caret line="337" column="72" selection-start-line="337" selection-start-column="72" selection-end-line="337" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Dfa.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -391,6 +379,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/textFiles/DFA_Output _2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Nfa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="252" column="8" selection-start-line="252" selection-start-column="8" selection-end-line="252" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

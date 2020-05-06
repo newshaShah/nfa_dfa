@@ -224,7 +224,6 @@ public class Nfa {
         }
     }
 
-    //اگر به تعداد الفبا یال خروجی برای هر state وجود داشته باشد الگوریتم به پایان رسیده است.
 
     /**
      *If foe each state there was 'number of alphabets' transmissions algorithm is done
@@ -251,7 +250,7 @@ public class Nfa {
      * @param dfa is object of Dfa
      */
     private void findNextStates(Dfa dfa) {
-        //به ازای همه qi های موجود در یک state  درصورتی که یال های خروجی به تعداد الفبا وجود نداشته باشد، دلتا* برای هر کدام از الفبا ها محاسبه شود و دلتا* qi ها با هم اجتماع گرفته شود
+
         for (int i = 0; i < dfa.getStates().size(); i++) {
             if(!dfa.getStates().get(i).equals("Φ")) {
                 for (int j = 0; j < alphabets.length; j++) {
