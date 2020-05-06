@@ -10,6 +10,7 @@ public class Nfa {
     private String[] states;
 
     private String[] finalStates;
+    private String start;
     //There are more than one next state for one current state and input
     private ArrayList<String[]> transmissions;
 
@@ -30,6 +31,7 @@ public class Nfa {
         alphabets = lines.get(0).split(" ");
 
         states = lines.get(1).split(" ");
+        start = lines.get(2);
 
         finalStates = lines.get(3).split(" ");
         for (int i = 4; i < lines.size(); i++) {
@@ -57,7 +59,7 @@ public class Nfa {
         for (String[] transmission : transmissions) {
             if (transmission[0].equals(state) || temp.contains(transmission[0])) {
                 if (transmission[1].equals(lambda)) {
-                    temp.add(transmission[1]);
+                    temp.add(transmission[2]);
 
 //                    if (!temp.contains(transmission[2]))
 //                        temp.add(transmission[2]);
@@ -97,7 +99,7 @@ public class Nfa {
 
     void nfa2dfa() throws IOException {
 
-        Dfa dfa = new Dfa("q0", alphabets);
+        Dfa dfa = new Dfa(start, alphabets);
 
 
         //flag is weather each state in dfa has all outer
@@ -108,19 +110,6 @@ public class Nfa {
         setFinalStates(dfa);
         writeDfaToFile(dfa,"textFiles/DFA_Output _2.txt");
 
-//        System.out.print("States");
-//        System.out.println(dfa.getStates());
-//
-//
-//        System.out.print("final states");
-//
-//        System.out.println(dfa.getFinalStates());
-//
-//        for (String[] key:dfa.getTransmissions().keySet()
-//             ) {
-//            System.out.println(key[0]+" "+key[1]+" : "+dfa.getTransmissions().get(key));
-//
-//        }
 
     }
 
@@ -129,7 +118,6 @@ public class Nfa {
         ArrayList<String> lines = new ArrayList<>();
         String dfaAlphabets = "";
         for (String alphabet : alphabets) {
-            // lines.add(0,alphabets[i]);
             dfaAlphabets = dfaAlphabets.concat(alphabet);
             dfaAlphabets = dfaAlphabets.concat(" ");
 
@@ -137,8 +125,16 @@ public class Nfa {
 
         }
         String dfaStates  = "";
-        for (String state : dfa.getStates()) {
-            // lines.add(0,alphabets[i]);
+        ArrayList<String> states = new ArrayList<>();
+        states.add(dfa.getStates().get(0));
+        for (int i = 0; i <dfa.getStates().size() ; i++) {
+
+            if(!isStateExist(states,dfa.getStates().get(i)))
+                states.add(dfa.getStates().get(i));
+
+
+        }
+        for (String state : states) {
              dfaStates = dfaStates.concat(state);
              dfaStates = dfaStates.concat(" ");
 
@@ -146,8 +142,16 @@ public class Nfa {
         }
 
         String dfaFinalStates  = "";
-        for (String state : dfa.getFinalStates()) {
-            // lines.add(0,alphabets[i]);
+        ArrayList<String> finalStates = new ArrayList<>();
+        finalStates.add(dfa.getFinalStates().get(0));
+        for (int i = 0; i <dfa.getFinalStates().size() ; i++) {
+
+            if(!isStateExist(finalStates,dfa.getFinalStates().get(i)))
+                finalStates.add(dfa.getFinalStates().get(i));
+
+
+        }
+        for (String state : finalStates) {
             dfaFinalStates = dfaFinalStates.concat(state);
             dfaFinalStates = dfaFinalStates.concat(" ");
 
@@ -210,7 +214,7 @@ public class Nfa {
     private void findNextStates(Dfa dfa) {
         //به ازای همه qi های موجود در یک state  درصورتی که یال های خروجی به تعداد الفبا وجود نداشته باشد، دلتا* برای هر کدام از الفبا ها محاسبه شود و دلتا* qi ها با هم اجتماع گرفته شود
         for (int i = 0; i < dfa.getStates().size(); i++) {
-            if(!dfa.getStates().get(i).equals("NULL")) {
+            if(!dfa.getStates().get(i).equals("Φ")) {
                 for (int j = 0; j < alphabets.length; j++) {
                     List<String> temp = new ArrayList<>();
 //
@@ -266,11 +270,36 @@ public class Nfa {
         String[] key = new String[2];
         key[0] = s;
         key[1] = alphabet;
+        List<String> wordList1 = Arrays.asList(key[0].split(""));
+
+
         // if(dfa.getTransmissions().keySet().contains(key))
+//        for (String[] str : dfa.getTransmissions().keySet()) {
+//            if (Arrays.equals(key, str))
+//                return true;
+//        }
+
         for (String[] str : dfa.getTransmissions().keySet()) {
-            if (Arrays.equals(key, str))
+            List<String> wordList2 = Arrays.asList(str[0].split(""));
+
+            if (wordList2.containsAll(wordList1) && wordList1.size()==wordList2.size() && str[1].equals(alphabet) )
                 return true;
         }
+
         return false;
+    }
+
+    boolean isStateExist(ArrayList<String> states, String s){
+        for (int i = 0; i <states.size() ; i++) {
+            List<String> wordList1 =  Arrays.asList(states.get(i).split(""));
+            List<String> wordList2 =  Arrays.asList(s.split(""));
+            if(wordList1.containsAll(wordList2) && wordList1.size()==wordList2.size())
+                return true;
+
+
+
+        }
+        return false;
+
     }
 }

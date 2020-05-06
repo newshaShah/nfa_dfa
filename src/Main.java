@@ -19,6 +19,16 @@ public class Main {
         }
 
         Nfa nfa = new Nfa("textFiles/NFA_Input_2.txt");
+//        String str1 = "q0q2q1";
+//        String str2 = "q2q0q1";
+//
+//        String[] words1 = str1.split("");
+//        String[] words2 = str2.split("");
+//
+//
+//        List<String> wordList1 = Arrays.asList(words1);
+//        List<String> wordList2 = Arrays.asList(words2);
+//        System.out.println(wordList2.containsAll(wordList1));
 
        // System.out.println(nfa.deltaStar("q0","0"));
         nfa.nfa2dfa();
