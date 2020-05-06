@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
+
 class Dfa {
 
     private String currentState;
@@ -15,7 +16,13 @@ class Dfa {
 
     private ArrayList<String> finalStates;
     private HashMap<String[], String> transmissions;
-    //A constructor for dfa use file direction for input
+
+
+    /**
+     * A constructor for dfa use dfa file path for input
+     * @param fileName is path of dfa file
+     * @throws IOException for reading file
+     */
     Dfa(String fileName) throws IOException {
         ArrayList<String> lines = new ArrayList<>();
         states = new ArrayList<>();
@@ -33,11 +40,9 @@ class Dfa {
         alphabets = lines.get(0).split(" ");
 
         Collections.addAll(states, lines.get(1).split(" "));
-        //states = lines.get(1).split(" ");
         start = lines.get(2);
         currentState = start;
         Collections.addAll(finalStates, lines.get(3).split(" "));
-        //finalStates = lines.get(3).split(" ");
         transmissions = new HashMap<>();
         for (int i = 4; i < lines.size(); i++) {
             String[] key = new String[2];
@@ -53,6 +58,11 @@ class Dfa {
 
     }
 
+    /**
+     * A constructor that use param start and alphabet of dfa for creating it witch is used in nfa class
+     * @param start is start state of dfa
+     * @param alphabets is alphabets of dfa
+     */
     public Dfa(String start,String[] alphabets){
         states = new ArrayList<>();
         transmissions = new HashMap<>();
@@ -66,15 +76,11 @@ class Dfa {
 
     }
 
-//    public void setAlphabets(String[] alphabets) {
-//        this.alphabets = alphabets;
-//    }
-//
+
     public void addFinalStates(String finalState) {
-        //if(!finalStates.contains(finalState))
             finalStates.add(finalState);
     }
-//
+
     public void addTransmissions(String[] key,String value) {
         transmissions.put(key,value);
     }
@@ -98,11 +104,7 @@ class Dfa {
         return states;
     }
 
-    //
-//    public void setStart(String start) {
-//        this.start = start;
-//    }
-
+//Checks weather a state is final state of a dfa or not
     private boolean IsFinalState() {
         for (String finalState : finalStates) {
 
@@ -113,6 +115,7 @@ class Dfa {
         return false;
     }
 
+    //By using transmission , current state and input specify next state and then shift current state to next state
     private void nextState(String input) {
         String[] currInput = new String[2];
 
@@ -134,6 +137,11 @@ class Dfa {
 
     }
 
+    /**
+     *
+     * @param input is input string foe dfa machine
+     * @return true weather input string is accepted
+     */
     boolean isStringAccepted(String input) {
         for (int i = 0; i < input.length(); i++) {
             String inputI = Character.toString(input.charAt(i));

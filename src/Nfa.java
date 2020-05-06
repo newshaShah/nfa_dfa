@@ -11,13 +11,20 @@ public class Nfa {
 
     private String[] finalStates;
     private String start;
-    //There are more than one next state for one current state and input
+    //There are more than one next state for one current state and input in NFA
+    // therefore I used this structure for transmissions in Nfa class
     private ArrayList<String[]> transmissions;
 
+    /**
+     *
+     * @param fileName is the path of Nfa_Input file
+     * @throws IOException for reading file
+     */
     Nfa(String fileName) throws IOException {
         //Lines of input file for NFA machine
         transmissions = new ArrayList<>();
 
+        //lines of the NFA file
         ArrayList<String> lines = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -41,9 +48,16 @@ public class Nfa {
     }
     // Method to return delta* of a state and its input
 
+
+    /**
+     * This method is for returning δ*(state,input)
+     * @param state is current state in δ*
+     * @param input is input in δ*
+     * @return δ*
+     */
     ArrayList<String> deltaStar(String state, String input) {
         String lambda = "λ";
-//اضافه کردن آن هایی که در state قرار داردند و ورودی آنها input است
+//for those those transmissions that are like "state input ..."
         ArrayList<String> deltastar = new ArrayList<>();
         for (String[] transmission : transmissions) {
             if (transmission[0].equals(state)) {
@@ -54,19 +68,19 @@ public class Nfa {
                 }
             }
         }
-///اگر اولش تعدادی لاندا اومد بعد input اومد هم باید اضافه بشه
+///for those those transmissions that are like "state λ state2","state2 λ state3",... or λ_closure state
         ArrayList<String> temp = new ArrayList<>();
         for (String[] transmission : transmissions) {
             if (transmission[0].equals(state) || temp.contains(transmission[0])) {
                 if (transmission[1].equals(lambda)) {
                     temp.add(transmission[2]);
 
-//                    if (!temp.contains(transmission[2]))
-//                        temp.add(transmission[2]);
+
 
                 }
             }
         }
+///for those transmissions that are like "λ_closure input ..."
 
         for (int i = 0; i <temp.size() ; i++) {
             for (int j = 0; j <transmissions.size() ; j++) {
@@ -79,6 +93,8 @@ public class Nfa {
             }
         }
 
+
+///for transmissions that have λ after giving input such as state3 in "state input state2","state2 λ state3"
 
 
         for (int i = 0; i < deltastar.size(); i++) {
@@ -97,12 +113,16 @@ public class Nfa {
         return deltastar;
     }
 
+    /**
+     * Method for creating DFA from given nfa
+     * @throws IOException for reading nfa file
+     */
     void nfa2dfa() throws IOException {
 
         Dfa dfa = new Dfa(start, alphabets);
 
 
-        //flag is weather each state in dfa has all outer
+
         while (!isAlgorithmDone(dfa)) {
             findNextStates(dfa);
 
@@ -113,6 +133,12 @@ public class Nfa {
 
     }
 
+    /**
+     *
+     * @param dfa is an object of Dfa class
+     * @param s file path for writing dfa characters in it
+     * @throws IOException for writing file
+     */
     private void writeDfaToFile(Dfa dfa, String s) throws IOException {
         PrintWriter writer = new PrintWriter(s, StandardCharsets.UTF_8);
         ArrayList<String> lines = new ArrayList<>();
@@ -184,6 +210,10 @@ public class Nfa {
         writer.close();
     }
 
+    /**
+     * set final states of dfa witch is is defined by nfa final states
+     * @param dfa object of Dfa
+     */
     private void setFinalStates(Dfa dfa) {
         for (int i = 0; i <dfa.getStates().size() ; i++) {
             for (String finalState : finalStates) {
@@ -196,6 +226,11 @@ public class Nfa {
 
     //اگر به تعداد الفبا یال خروجی برای هر state وجود داشته باشد الگوریتم به پایان رسیده است.
 
+    /**
+     *If foe each state there was 'number of alphabets' transmissions algorithm is done
+     * @param dfa object of Dfa
+     * @return true if algorithm is done
+     */
     private boolean isAlgorithmDone(Dfa dfa) {
         for (int i = 0; i < dfa.getStates().size(); i++) {
 
@@ -211,27 +246,25 @@ public class Nfa {
 
     }
 
+    /**
+     * Fine next transmissions in each state of algorithm
+     * @param dfa is object of Dfa
+     */
     private void findNextStates(Dfa dfa) {
         //به ازای همه qi های موجود در یک state  درصورتی که یال های خروجی به تعداد الفبا وجود نداشته باشد، دلتا* برای هر کدام از الفبا ها محاسبه شود و دلتا* qi ها با هم اجتماع گرفته شود
         for (int i = 0; i < dfa.getStates().size(); i++) {
             if(!dfa.getStates().get(i).equals("Φ")) {
                 for (int j = 0; j < alphabets.length; j++) {
                     List<String> temp = new ArrayList<>();
-//
+
                     String nextState = "";
 
                     if (!isEdgeExist(dfa, dfa.getStates().get(i), alphabets[j])) {
-                        //////////////////
+
                         for (int k = 0; k < states.length; k++) {
                             if (dfa.getStates().get(i).contains(states[k])) {
                                 // temp.add(deltaStar(states[k],alphabets[j]));
                                 temp.addAll(deltaStar(states[k], alphabets[j]));
-                                System.out.println(temp);
-//                                Set<String> fooSet = new LinkedHashSet<>(temp);
-//                                fooSet.addAll(deltaStar(states[k], alphabets[j]));
-//                                List<String> finalFoo = new ArrayList<>(fooSet);
-//                                System.out.println(finalFoo);
-//                                temp =  finalFoo;
                             }
                         }
                         if (!temp.isEmpty()) {
@@ -266,6 +299,13 @@ public class Nfa {
         }
     }
 
+    /**
+     *
+     * @param dfa object of Dfa
+     * @param s in a state
+     * @param alphabet is input for a state
+     * @return true if transmission for 'state input ...' exist in dfa transmission
+     */
     private boolean isEdgeExist(Dfa dfa, String s, String alphabet) {
         String[] key = new String[2];
         key[0] = s;
@@ -273,11 +313,7 @@ public class Nfa {
         List<String> wordList1 = Arrays.asList(key[0].split(""));
 
 
-        // if(dfa.getTransmissions().keySet().contains(key))
-//        for (String[] str : dfa.getTransmissions().keySet()) {
-//            if (Arrays.equals(key, str))
-//                return true;
-//        }
+
 
         for (String[] str : dfa.getTransmissions().keySet()) {
             List<String> wordList2 = Arrays.asList(str[0].split(""));
@@ -289,10 +325,17 @@ public class Nfa {
         return false;
     }
 
+    /**
+     *
+     * @param states is list of states
+     * @param s is a state
+     * @return true if state s exists in states
+     */
     boolean isStateExist(ArrayList<String> states, String s){
         for (int i = 0; i <states.size() ; i++) {
             List<String> wordList1 =  Arrays.asList(states.get(i).split(""));
             List<String> wordList2 =  Arrays.asList(s.split(""));
+            //for example state q1q2q3 is similar to qq3q1q2 in this dfa
             if(wordList1.containsAll(wordList2) && wordList1.size()==wordList2.size())
                 return true;
 
