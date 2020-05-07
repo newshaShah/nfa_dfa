@@ -17,10 +17,11 @@ class Dfa {
 
     /**
      * A constructor for dfa use dfa file path for input
+     *
      * @param fileName is path of dfa file
      * @throws IOException for reading file
      */
-    Dfa(String fileName) throws IOException {
+    public Dfa(String fileName) throws IOException {
         ArrayList<String> lines = new ArrayList<>();
         states = new ArrayList<>();
         finalStates = new ArrayList<>();
@@ -57,10 +58,11 @@ class Dfa {
 
     /**
      * A constructor that use param start and alphabet of dfa for creating it witch is used in nfa class
-     * @param start is start state of dfa
+     *
+     * @param start     is start state of dfa
      * @param alphabets is alphabets of dfa
      */
-    public Dfa(String start,String[] alphabets){
+    public Dfa(String start, String[] alphabets) {
         states = new ArrayList<>();
         transmissions = new HashMap<>();
         finalStates = new ArrayList<>();
@@ -69,18 +71,17 @@ class Dfa {
         states.add(start);
 
 
-
-
     }
 
 
     public void addFinalStates(String finalState) {
-            finalStates.add(finalState);
+        finalStates.add(finalState);
     }
 
-    public void addTransmissions(String[] key,String value) {
-        transmissions.put(key,value);
+    public void addTransmissions(String[] key, String value) {
+        transmissions.put(key, value);
     }
+
     public void addStates(String state) {
         states.add(state);
     }
@@ -101,7 +102,7 @@ class Dfa {
         return states;
     }
 
-//Checks whether a state is final state of a dfa or not
+    //Checks whether a state is final state of a dfa or not
     private boolean IsFinalState() {
         for (String finalState : finalStates) {
 
@@ -123,13 +124,10 @@ class Dfa {
             for (String[] str : transmissions.keySet()) {
 
 
+                List<String> wordList2 = Arrays.asList(str[0].split(""));
 
-                    List<String> wordList2 = Arrays.asList(str[0].split(""));
-
-                    if (wordList2.containsAll(wordList1) && wordList1.size() == wordList2.size() && str[1].equals(currInput[1]))
-                        currentState = transmissions.get(str);
-
-
+                if (wordList2.containsAll(wordList1) && wordList1.size() == wordList2.size() && str[1].equals(currInput[1]))
+                    currentState = transmissions.get(str);
 
 
             }
@@ -139,11 +137,10 @@ class Dfa {
     }
 
     /**
-     *
      * @param input is input string foe dfa machine
      * @return true whether input string is accepted
      */
-    boolean isStringAccepted(String input) {
+    public boolean isStringAccepted(String input) {
         for (int i = 0; i < input.length(); i++) {
             String inputI = Character.toString(input.charAt(i));
             if (Arrays.asList(alphabets).contains(inputI)) {

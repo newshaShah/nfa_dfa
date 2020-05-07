@@ -1,6 +1,11 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 
@@ -20,7 +25,7 @@ public class Nfa {
      * @param fileName is the path of Nfa_Input file
      * @throws IOException for reading file
      */
-    Nfa(String fileName) throws IOException {
+    public Nfa(String fileName) throws IOException {
         //Lines of input file for NFA machine
         transmissions = new ArrayList<>();
 
@@ -55,7 +60,7 @@ public class Nfa {
      * @param input is input in δ*
      * @return δ*
      */
-    ArrayList<String> deltaStar(String state, String input) {
+    private ArrayList<String> deltaStar(String state, String input) {
         String lambda = "λ";
 //for those those transmissions that are like "state input ..."
         ArrayList<String> deltastar = new ArrayList<>();
@@ -117,7 +122,7 @@ public class Nfa {
      * Method for creating DFA from given nfa
      * @throws IOException for reading nfa file
      */
-    void nfa2dfa() throws IOException {
+    public void nfa2dfa() throws IOException {
 
         Dfa dfa = new Dfa(start, alphabets);
 

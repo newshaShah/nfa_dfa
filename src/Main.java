@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -13,19 +13,16 @@ public class Main {
 
 
         if (dfa.isStringAccepted(input)) {
-            System.out.println("This input string: <"+input+"> is accepted by  DFA machine  ");
+            System.out.println("This input string: <" + input + "> is accepted by  DFA machine  ");
         } else {
-            System.out.println("This input string: <"+input+"> is 'not' accepted by DFA machine ");
+            System.out.println("This input string: <" + input + "> is 'not' accepted by DFA machine ");
         }
         System.out.println();
 
-//        System.out.println("Now wait for converting NFA to Dfa:");
-//        Nfa nfa = new Nfa("textFiles/NFA_Input_2.txt");
-//        nfa.nfa2dfa();
-//        System.out.println("Done!, The dfa machine characteristics is written in its file.");
-//
-//
-
+        System.out.println("Now wait for converting NFA to Dfa:");
+        Nfa nfa = new Nfa("textFiles/NFA_Input_2.txt");
+        nfa.nfa2dfa();
+        System.out.println("Done!, The dfa machine characteristics is written in its file.");
 
 
     }
