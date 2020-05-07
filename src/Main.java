@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        Dfa dfa = new Dfa("textFiles\\DFA_Output _2.txt");
+        Dfa dfa = new Dfa("textFiles\\DFA_Input_1.txt");
 
         System.out.println("Please enter input string to check whether it is accepted by Dfa machine or not: ");
         Scanner scanner = new Scanner(System.in);
@@ -19,12 +19,12 @@ public class Main {
         }
         System.out.println();
 
-        System.out.println("Now wait for converting NFA to Dfa:");
-        Nfa nfa = new Nfa("textFiles/NFA_Input_2.txt");
-        nfa.nfa2dfa();
-        System.out.println("Done!, The dfa machine characteristics is written in its file.");
-
-
+//        System.out.println("Now wait for converting NFA to Dfa:");
+//        Nfa nfa = new Nfa("textFiles/NFA_Input_2.txt");
+//        nfa.nfa2dfa();
+//        System.out.println("Done!, The dfa machine characteristics is written in its file.");
+//
+//
 
 
 
