@@ -330,7 +330,7 @@ public class Nfa {
      * @param s is a state
      * @return true if state s exists in states
      */
-    boolean isStateExist(ArrayList<String> states, String s){
+    private boolean isStateExist(ArrayList<String> states, String s){
         for (int i = 0; i <states.size() ; i++) {
             List<String> wordList1 =  Arrays.asList(states.get(i).split(""));
             List<String> wordList2 =  Arrays.asList(s.split(""));

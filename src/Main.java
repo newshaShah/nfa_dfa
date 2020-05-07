@@ -5,9 +5,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        Dfa dfa = new Dfa("textFiles\\DFA_Input_1.txt");
+        Dfa dfa = new Dfa("textFiles\\DFA_Output _2.txt");
 
-        System.out.println("Please enter input string to check weather it is accepted by Dfa machine or not: ");
+        System.out.println("Please enter input string to check whether it is accepted by Dfa machine or not: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
 

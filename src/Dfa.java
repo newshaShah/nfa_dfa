@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 
 class Dfa {
@@ -104,7 +101,7 @@ class Dfa {
         return states;
     }
 
-//Checks weather a state is final state of a dfa or not
+//Checks whether a state is final state of a dfa or not
     private boolean IsFinalState() {
         for (String finalState : finalStates) {
 
@@ -122,14 +119,18 @@ class Dfa {
         currInput[0] = currentState;
         if (Arrays.asList(alphabets).contains(input)) {
             currInput[1] = input;
+            List<String> wordList1 = Arrays.asList(currInput[0].split(""));
             for (String[] str : transmissions.keySet()) {
-                if (Arrays.equals(currInput, str)) {
 
-                    currentState = transmissions.get(str);
-                    if (!states.contains(currentState))
-                        System.out.println("Wrong input file for DFA machine\n"
-                                + currentState + " is not in states of this machine");
-                }
+
+
+                    List<String> wordList2 = Arrays.asList(str[0].split(""));
+
+                    if (wordList2.containsAll(wordList1) && wordList1.size() == wordList2.size() && str[1].equals(currInput[1]))
+                        currentState = transmissions.get(str);
+
+
+
 
             }
         }
@@ -140,7 +141,7 @@ class Dfa {
     /**
      *
      * @param input is input string foe dfa machine
-     * @return true weather input string is accepted
+     * @return true whether input string is accepted
      */
     boolean isStringAccepted(String input) {
         for (int i = 0; i < input.length(); i++) {
