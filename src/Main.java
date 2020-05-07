@@ -13,9 +13,9 @@ public class Main {
 
 
         if (dfa.isStringAccepted(input)) {
-            System.out.println("This input string: <"+input+"> is accepted by  DFA_Input_1  ");
+            System.out.println("This input string: <"+input+"> is accepted by  DFA machine  ");
         } else {
-            System.out.println("This input string: <"+input+"> is 'not' accepted by DFA_Input_1 ");
+            System.out.println("This input string: <"+input+"> is 'not' accepted by DFA machine ");
         }
         System.out.println();
 
